@@ -5,4 +5,7 @@ export const Spacings = {
   s3: "12px",
   s4: "16px",
   s5: "20px",
+  s6: "35px",
+  s7: '10vw',
+  s8: '5vh'
 }

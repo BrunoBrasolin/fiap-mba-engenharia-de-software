@@ -6,6 +6,7 @@ export const Typography_H1 = styled.h1`
   line-height: 56px;
   font-weight: 700;
   font-family: "Jersey 15", "sans-serif";
+  margin: 0;
 `;
 
 export const Typography_H2 = styled.h2`
@@ -13,6 +14,7 @@ export const Typography_H2 = styled.h2`
   line-height: 44px;
   font-weight: 500;
   font-family: "Jersey 15", "sans-serif";
+  margin: 0;
 `;
 
 export const Typography_H3 = styled.h3`
@@ -20,13 +22,15 @@ export const Typography_H3 = styled.h3`
   line-height: 34px;
   font-weight: 500;
   font-family: "Jersey 15", "sans-serif";
+  margin: 0;
 `;
 
-export const Typography_Text = styled.p`
+export const Typography_Text = styled.span`
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
   font-family: "Jersey 15", "sans-serif";
+  margin: 0;
 `;
 
 export const Typography_Small = styled.small`
@@ -34,4 +38,5 @@ export const Typography_Small = styled.small`
   line-height: 20px;
   font-weight: 300;
   font-family: "Jersey 15", "sans-serif";
+  margin: 0;
 `;

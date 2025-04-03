@@ -4,10 +4,20 @@ export const Colors = {
     600: "#FF416C",
     500: "#FF3F3F"
   },
+  purple: {
+    900: "#BF00FF",
+    600: "#A34CDE",
+    500: "#9B4DFF"
+  },
   white: {
     900: "#FFFFFF",
     600: "#E6E6E6",
     500: "#F1F1F1"
+  },
+  darkGray: {
+    900: "#333333",
+    600: "#3E3E3E",
+    500: "#2C2C2C"
   },
   black: {
     100: "#000000",

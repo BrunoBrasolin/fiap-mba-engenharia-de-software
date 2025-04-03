@@ -5,7 +5,7 @@ import { Typography_Text } from "../../utils/typography";
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   rightIcon?: ReactNode;
-  buttonStyle: "default" | "outline";
+  buttonstyle: "default" | "outline";
 }
 
 export function Button({ text, rightIcon, ...props }: ButtonProps) {
