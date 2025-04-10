@@ -1,0 +1,49 @@
+[
+    {
+        "id": "0508006c0489679b",
+        "type": "ui_button",
+        "z": "3c37de43934f588c",
+        "name": "",
+        "group": "daafc0092ad6543f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "1",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "82792412a5b77003",
+                "58e947010b5d2e7d"
+            ]
+        ]
+    },
+    {
+        "id": "daafc0092ad6543f",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "6ea1cf993a687107",
+        "order": 1,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "6ea1cf993a687107",
+        "type": "ui_tab",
+        "name": "HOUSE",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
