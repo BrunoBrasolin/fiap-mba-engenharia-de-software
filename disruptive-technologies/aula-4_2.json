@@ -3,11 +3,11 @@
       "id": "f2ff40863b6ad17d",
       "type": "telegram receiver",
       "z": "3c37de43934f588c",
-      "name": "",
+      "name": "Receber mensagem Telegram",
       "bot": "470f081aa78d9034",
       "saveDataDir": "",
       "filterCommands": false,
-      "x": 290,
+      "x": 120,
       "y": 180,
       "wires": [
           [
@@ -20,7 +20,7 @@
       "id": "e0cf057514ab5d49",
       "type": "change",
       "z": "3c37de43934f588c",
-      "name": "",
+      "name": "Consultar histórico/salvar payload original",
       "rules": [
           {
               "t": "move",
@@ -49,11 +49,11 @@
       "from": "",
       "to": "",
       "reg": false,
-      "x": 500,
+      "x": 440,
       "y": 180,
       "wires": [
           [
-              "8a15646fafe790e8"
+              "b87ffe8fbec801b0"
           ]
       ]
   },
@@ -61,11 +61,11 @@
       "id": "8a15646fafe790e8",
       "type": "chatgpt",
       "z": "3c37de43934f588c",
-      "name": "",
+      "name": "Chat GPT 4o",
       "topic": "gpt4o",
       "BaseUrl": "https://api.openai.com",
-      "x": 680,
-      "y": 180,
+      "x": 690,
+      "y": 240,
       "wires": [
           [
               "6a3a83cb93e333b1"
@@ -76,7 +76,7 @@
       "id": "6a3a83cb93e333b1",
       "type": "change",
       "z": "3c37de43934f588c",
-      "name": "",
+      "name": "Montar resposta do Telegram/salvar histórico",
       "rules": [
           {
               "t": "move",
@@ -105,7 +105,7 @@
       "from": "",
       "to": "",
       "reg": false,
-      "x": 860,
+      "x": 1290,
       "y": 180,
       "wires": [
           [
@@ -114,17 +114,98 @@
       ]
   },
   {
-      "id": "1bf76fab627d2bd9",
-      "type": "telegram sender",
+      "id": "c52b327397d0d264",
+      "type": "function",
       "z": "3c37de43934f588c",
-      "name": "",
-      "bot": "470f081aa78d9034",
-      "haserroroutput": false,
+      "name": "Montar JSON payload",
+      "func": "msg.payload = {\n    latitude: -23.55,\n    longitude: -46.63\n};\n\nreturn msg;",
       "outputs": 1,
-      "x": 1070,
+      "timeout": 0,
+      "noerr": 0,
+      "initialize": "",
+      "finalize": "",
+      "libs": [],
+      "x": 720,
       "y": 180,
       "wires": [
-          []
+          [
+              "64108b5abc2b6c20"
+          ]
+      ]
+  },
+  {
+      "id": "64108b5abc2b6c20",
+      "type": "http request",
+      "z": "3c37de43934f588c",
+      "name": "GET open-meteo",
+      "method": "GET",
+      "ret": "obj",
+      "paytoqs": "ignore",
+      "url": "https://api.open-meteo.com/v1/forecast?latitude={{payload.latitude}}&longitude={{payload.longitude}}&current_weather=true",
+      "tls": "",
+      "persist": false,
+      "proxy": "",
+      "insecureHTTPParser": false,
+      "authType": "",
+      "senderr": false,
+      "headers": [],
+      "x": 870,
+      "y": 180,
+      "wires": [
+          [
+              "60f3c2ff28bdb6b0"
+          ]
+      ]
+  },
+  {
+      "id": "60f3c2ff28bdb6b0",
+      "type": "function",
+      "z": "3c37de43934f588c",
+      "name": "Parsear JSON",
+      "func": "const weather = msg.payload.current_weather;\n\nmsg.payload = `🌤️ Previsão do tempo atual:\nTemperatura: ${weather.temperature}°C\nVelocidade do vento: ${weather.windspeed} km/h\nCondição: ${weather.weathercode}`;\n\nreturn msg;\n",
+      "outputs": 1,
+      "timeout": 0,
+      "noerr": 0,
+      "initialize": "",
+      "finalize": "",
+      "libs": [],
+      "x": 1040,
+      "y": 180,
+      "wires": [
+          [
+              "6a3a83cb93e333b1"
+          ]
+      ]
+  },
+  {
+      "id": "b87ffe8fbec801b0",
+      "type": "switch",
+      "z": "3c37de43934f588c",
+      "name": "Switch mensagem usuário",
+      "property": "payload",
+      "propertyType": "msg",
+      "rules": [
+          {
+              "t": "eq",
+              "v": "/tempo",
+              "vt": "str"
+          },
+          {
+              "t": "else"
+          }
+      ],
+      "checkall": "false",
+      "repair": false,
+      "outputs": 2,
+      "x": 600,
+      "y": 180,
+      "wires": [
+          [
+              "c52b327397d0d264"
+          ],
+          [
+              "8a15646fafe790e8"
+          ]
       ]
   },
   {

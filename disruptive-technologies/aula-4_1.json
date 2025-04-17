@@ -1,0 +1,157 @@
+[
+  {
+      "id": "f2ff40863b6ad17d",
+      "type": "telegram receiver",
+      "z": "3c37de43934f588c",
+      "name": "Receber Mensagem Telegram",
+      "bot": "470f081aa78d9034",
+      "saveDataDir": "",
+      "filterCommands": false,
+      "x": 290,
+      "y": 180,
+      "wires": [
+          [
+              "e0cf057514ab5d49"
+          ],
+          []
+      ]
+  },
+  {
+      "id": "e0cf057514ab5d49",
+      "type": "change",
+      "z": "3c37de43934f588c",
+      "name": "Consultar histórico/salvar payload original",
+      "rules": [
+          {
+              "t": "move",
+              "p": "payload",
+              "pt": "msg",
+              "to": "telegram",
+              "tot": "msg"
+          },
+          {
+              "t": "move",
+              "p": "telegram.content",
+              "pt": "msg",
+              "to": "payload",
+              "tot": "msg"
+          },
+          {
+              "t": "move",
+              "p": "history",
+              "pt": "flow",
+              "to": "history",
+              "tot": "msg"
+          }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 500,
+      "y": 180,
+      "wires": [
+          [
+              "8a15646fafe790e8"
+          ]
+      ]
+  },
+  {
+      "id": "8a15646fafe790e8",
+      "type": "chatgpt",
+      "z": "3c37de43934f588c",
+      "name": "ChatGPT 4o",
+      "topic": "gpt4o",
+      "BaseUrl": "https://api.openai.com",
+      "x": 680,
+      "y": 180,
+      "wires": [
+          [
+              "6a3a83cb93e333b1"
+          ]
+      ]
+  },
+  {
+      "id": "6a3a83cb93e333b1",
+      "type": "change",
+      "z": "3c37de43934f588c",
+      "name": "Montar resposta do Telegram/salvar histórico",
+      "rules": [
+          {
+              "t": "move",
+              "p": "payload",
+              "pt": "msg",
+              "to": "telegram.content",
+              "tot": "msg"
+          },
+          {
+              "t": "move",
+              "p": "telegram",
+              "pt": "msg",
+              "to": "payload",
+              "tot": "msg"
+          },
+          {
+              "t": "move",
+              "p": "history",
+              "pt": "msg",
+              "to": "history",
+              "tot": "flow"
+          }
+      ],
+      "action": "",
+      "property": "",
+      "from": "",
+      "to": "",
+      "reg": false,
+      "x": 860,
+      "y": 180,
+      "wires": [
+          [
+              "1bf76fab627d2bd9"
+          ]
+      ]
+  },
+  {
+      "id": "1bf76fab627d2bd9",
+      "type": "telegram sender",
+      "z": "3c37de43934f588c",
+      "name": "Enviar Mensagem Telegram",
+      "bot": "470f081aa78d9034",
+      "haserroroutput": false,
+      "outputs": 1,
+      "x": 1070,
+      "y": 180,
+      "wires": [
+          []
+      ]
+  },
+  {
+      "id": "470f081aa78d9034",
+      "type": "telegram bot",
+      "botname": "Dalme 2.0",
+      "usernames": "",
+      "chatids": "",
+      "baseapiurl": "",
+      "testenvironment": false,
+      "updatemode": "polling",
+      "pollinterval": 300,
+      "usesocks": false,
+      "sockshost": "",
+      "socksprotocol": "socks5",
+      "socksport": 6667,
+      "socksusername": "anonymous",
+      "sockspassword": "",
+      "bothost": "",
+      "botpath": "",
+      "localbothost": "0.0.0.0",
+      "localbotport": 8443,
+      "publicbotport": 8443,
+      "privatekey": "",
+      "certificate": "",
+      "useselfsignedcertificate": false,
+      "sslterminated": false,
+      "verboselogging": false
+  }
+]
