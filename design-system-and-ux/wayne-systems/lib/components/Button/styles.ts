@@ -20,10 +20,12 @@ export const Container = styled.button<Pick<ButtonProps, "buttonstyle">>`
   border: ${Borders.b0};
   box-shadow: ${Shadows.primary};
   transition: ${Transitions.t0};
+  align-self: flex-end;
 
-  svg {
+  img {
     height: 24px;
     width: 24px;
+    margin-left: ${Spacings.s2};
   }
 
   &:hover {

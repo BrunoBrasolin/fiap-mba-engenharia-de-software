@@ -1,8 +1,8 @@
-'use client'
+"use client";
 import styled from "styled-components";
+import Image from "next/image";
 import { Spacings } from "../../lib/utils/spacings";
 import { Colors } from "../../lib/utils/colors";
-import Image from 'next/image';
 
 export const Body = styled.body`
   margin: 0;
@@ -12,22 +12,27 @@ export const Body = styled.body`
 
 export const Container = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
   flex-direction: column;
-  text-align: center;
-  padding-left: ${Spacings.s7};
-  padding-top: ${Spacings.s8};
+  padding: ${Spacings.s8} ${Spacings.s7};
+  width: ${Spacings.s10};
 `;
 
 export const TitleContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  text-align: center;
-  margin: ${Spacings.s6} 0;
+  align-items: center;
   color: ${Colors.white[900]};
+  margin: ${Spacings.s4} 0;
+  text-align: center;
+`;
+
+export const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${Spacings.s4};
+  width: ${Spacings.s11};
+  margin-bottom: ${Spacings.s4};
+  align-self: center;
 `;
 
 export const GothamImage = styled(Image)`
@@ -44,4 +49,5 @@ export const VectorImage = styled(Image)`
   pointer-events: none;
   width: 100%;
   height: 100%;
+  z-index: -1;
 `;
