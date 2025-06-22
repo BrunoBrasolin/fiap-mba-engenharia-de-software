@@ -11,8 +11,8 @@ const Post = defineAsyncComponent({
 });
 
 const routes = [
-  { path: '/', name: 'Home', component: Home }, // rota raiz
-  { path: '/post/:slug', name: 'Post', component: Post },
+  { path: '/fiap-mba-engenharia-de-software', name: 'Home', component: Home },
+  { path: '/fiap-mba-engenharia-de-software/post/:slug', name: 'Post', component: Post },
 ];
 
 export const router = createRouter({
