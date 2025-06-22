@@ -41,8 +41,8 @@ Um projeto simples de blog feito com **Vue 3**, **Vite** e **Tailwind CSS**, com
 1. Clone este repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/vite-vue-blog-starter.git
-   cd vite-vue-blog-starter
+   git clone https://github.com/BrunoBrasolin/fiap-mba-engenharia-de-software.git
+   cd fiap-mba-engenharia-de-software/front-end-engineering/vuejs-vite-very-simple-blog
    ```
 
 2. Instale as dependências:
@@ -88,6 +88,11 @@ Este projeto consome a API pública JSONPlaceholder para obter os posts do blog:
 | `npm run preview` | Serve o build de produção localmente |
 
 ---
+
+## 🌐 Acesso ao Projeto Publicado
+
+- 🔗 URL do blog: [brunobrasolin.github.io/fiap-mba-engenharia-de-software](https://brunobrasolin.github.io/fiap-mba-engenharia-de-software/)
+- 🛠️ Código-fonte: [Repositório no GitHub](https://github.com/BrunoBrasolin/fiap-mba-engenharia-de-software/tree/main/front-end-engineering/vuejs-vite-very-simple-blog)
 
 ## 📝 Observações finais
 
