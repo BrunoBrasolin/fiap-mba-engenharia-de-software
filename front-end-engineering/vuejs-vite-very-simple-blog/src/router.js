@@ -11,11 +11,11 @@ const Post = defineAsyncComponent({
 });
 
 const routes = [
-  { path: '/fiap-mba-engenharia-de-software', name: 'Home', component: Home },
-  { path: '/fiap-mba-engenharia-de-software/post/:slug', name: 'Post', component: Post },
+  { path: '/', name: 'Home', component: Home },
+  { path: '/post/:slug', name: 'Post', component: Post },
 ];
 
 export const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
