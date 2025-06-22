@@ -1,45 +1,84 @@
 <template>
   <div class="max-w-3xl mx-auto px-4 py-8">
     <h1 class="text-4xl font-bold mb-8 text-center text-gray-800">Meu Blog</h1>
-    <div v-if="!posts.length" class="text-center text-gray-500">
-      <p>Nenhum post encontrado.</p>
-    </div>
 
-    <PostCard v-for="post in paginatedPosts" :key="post.id" :post="post" />
+    <div v-if="loading" class="text-center text-gray-500">Carregando posts...</div>
 
-    <div class="flex justify-center mt-8 space-x-2">
-      <button class="px-3 py-1 border rounded hover:bg-gray-100" :disabled="currentPage === 1" @click="currentPage--">
-        Anterior
-      </button>
+    <div v-if="error" class="text-center text-red-500 mb-6">{{ error }}</div>
 
-      <button v-for="page in totalPages" :key="page" @click="currentPage = page" :class="[
-        'px-3 py-1 border rounded',
-        currentPage === page ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
-      ]">
-        {{ page }}
-      </button>
+    <template v-if="!loading && !error">
+      <PostCard v-for="post in paginatedPosts" :key="post.id" :post="post" />
 
-      <button class="px-3 py-1 border rounded hover:bg-gray-100" :disabled="currentPage === totalPages"
-        @click="currentPage++">
-        Próxima
-      </button>
-    </div>
+      <nav class="flex justify-center mt-8 space-x-2" aria-label="Paginação do blog">
+        <button class="px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+          :disabled="currentPage === 1" @click="currentPage--" aria-label="Página anterior">
+          Anterior
+        </button>
+
+        <button v-for="page in totalPages" :key="page" @click="currentPage = page"
+          :aria-current="currentPage === page ? 'page' : undefined" :class="[
+            'px-3 py-1 border rounded',
+            currentPage === page
+              ? 'bg-blue-600 text-white'
+              : 'hover:bg-gray-100'
+          ]">
+          {{ page }}
+        </button>
+
+        <button class="px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+          :disabled="currentPage === totalPages" @click="currentPage++" aria-label="Próxima página">
+          Próxima
+        </button>
+      </nav>
+    </template>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { posts } from '../data/posts';
+import { ref, computed, onMounted } from 'vue';
 import PostCard from '../components/PostCard.vue';
 
-const postsPerPage = 5;
+const posts = ref([]);
+const loading = ref(false);
+const error = ref(null);
+
+const postsPerPage = 10;
 const currentPage = ref(1);
 
-const totalPages = Math.ceil(posts.length / postsPerPage);
+const totalPages = computed(() => Math.ceil(posts.value.length / postsPerPage));
 
 const paginatedPosts = computed(() => {
   const start = (currentPage.value - 1) * postsPerPage;
-  const end = start + postsPerPage;
-  return posts.slice(start, end);
+  return posts.value.slice(start, start + postsPerPage);
+});
+
+async function fetchPosts() {
+  loading.value = true;
+  error.value = null;
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+    if (!response.ok) {
+      throw new Error(`Erro ao buscar posts (status ${response.status})`);
+    }
+    const data = await response.json();
+
+    posts.value = data.map(post => ({
+      ...post,
+      slug: `post-${post.id}`,
+      description: post.body.slice(0, 80) + '...',
+      content: post.body,
+    }));
+
+    currentPage.value = 1;
+  } catch (err) {
+    error.value = err.message || 'Erro desconhecido ao buscar posts.';
+    posts.value = [];
+  } finally {
+    loading.value = false;
+  }
+}
+
+onMounted(() => {
+  fetchPosts();
 });
 </script>

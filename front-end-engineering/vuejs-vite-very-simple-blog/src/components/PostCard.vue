@@ -10,5 +10,10 @@
 </template>
 
 <script setup>
-defineProps({ post: Object });
+defineProps({
+  post: {
+    type: Object,
+    required: true
+  }
+});
 </script>
